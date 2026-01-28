@@ -1,0 +1,360 @@
+:root{
+  --brown-900: #2b1609;
+  --brown-700: #4e2e12;
+  --brown-500: #7f4a20;
+  --brown-300: #caa88e;
+  --accent: #b8793f;
+  --accent-2: #d29a62;
+  --bg: #fbf7f4;
+  --muted: #7a6a60;
+  --text-on-accent: #ffffff;
+  --max-width: 1200px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{overflow-x:hidden; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:var(--brown-900); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+.container{max-width:var(--max-width); margin:0 auto; padding:2.4rem}
+.app .footer{padding:2rem; text-align:center; color:var(--muted)}
+
+/* Typographic scale & spacing */
+h1{font-size:clamp(2rem, 4.2vw, 3rem); line-height:1.06; margin:0 0 0.6rem}
+h2{font-size:clamp(1.25rem, 2.2vw, 1.8rem); margin:0 0 1rem; line-height:1.25}
+h3{font-size:1.05rem; margin:0}
+p{margin:0 0 1rem; color:var(--muted); font-size:clamp(0.95rem, 1.2vw, 1.03rem); line-height:1.7}
+small{color:var(--muted); font-weight:600; font-size:0.95rem}
+
+/* Hero */
+.hero{background:linear-gradient(180deg, rgba(183,121,63,0.06), rgba(47,27,10,0.03)); padding:6.0rem 0 6.8rem; overflow:hidden}
+.hero .hero-inner{display:flex; gap:2rem; align-items:flex-start}
+.hero .hero-copy{max-width:640px; transform:translateY(-6px); transition:transform .9s cubic-bezier(.16,.84,.3,1)}
+.hero h1{font-size:clamp(2.2rem, 5.2vw, 3.2rem); margin:0 0 0.5rem; color:var(--brown-900); letter-spacing:-0.02em}
+.hero .lead{color:var(--brown-700); margin:0 0 1.6rem; font-size:clamp(1rem, 1.2vw, 1.1rem); line-height:1.7}
+.hero .hero-actions{display:flex; gap:0.6rem; align-items:center}
+.hero .hero-actions .btn{margin-right:0.8rem}
+
+/* On smaller screens, stack buttons and add extra space on the 'Kenapa Kami' (ghost) button */
+@media (max-width:900px){
+  .hero .hero-actions{flex-direction:column; align-items:center; gap:0.6rem}
+  .hero .hero-actions .btn{margin-right:0}
+  .hero .hero-actions .btn.ghost{margin-top:6px; padding-top:0.18rem}
+  .hero .hero-actions .btn.primary{width:100%; max-width:320px}
+}
+
+/* Make hero bottom padding larger on small screens so linked sections appear lower */
+@media (max-width:900px){ .hero{padding-bottom:6.6rem} }
+@media (max-width:425px){ .hero{padding-bottom:7.4rem} }
+@media (max-width:375px){ .hero{padding-bottom:7.8rem} }
+@media (max-width:320px){ .hero{padding-bottom:8.4rem} }
+
+/* Page scrollbar: modern, thin, rounded */
+html{scrollbar-width:thin; scrollbar-color: rgba(184,121,63,0.85) rgba(251,247,244,0.85)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:rgba(251,247,244,0.9); border-radius:999px;}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg, rgba(184,121,63,0.95), rgba(183,121,63,0.7)); border-radius:999px; border:2px solid rgba(251,247,244,0.9)}
+::-webkit-scrollbar-thumb:hover{transform:scale(1.02); box-shadow:0 8px 18px rgba(31,18,6,0.08)}
+
+/* Make sure product scroller still hides its native scrollbar */
+.product-scroller{ -ms-overflow-style: none; scrollbar-width: none}
+.product-scroller::-webkit-scrollbar{display:none}
+.hero .hero-art{width:min(620px, 52vw); max-width:620px; aspect-ratio:1/1; background:transparent; border-radius:14px; position:relative; display:flex; align-items:center; justify-content:center; padding:12px; box-shadow:0 30px 80px rgba(31,18,6,0.08); overflow:hidden}
+.hero .hero-art::after{content:''; position:absolute; inset:0; border-radius:14px; pointer-events:none; background:linear-gradient(180deg, rgba(251,247,244,0.55), rgba(247,240,234,0.42));}
+.logo-box{width:86%; aspect-ratio:1/1; max-width:500px; background:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; box-shadow:0 16px 48px rgba(31,18,6,0.08); overflow:hidden}
+.logo-box img, .hero .hero-logo{width:80%; height:auto; max-width:95%; display:block}
+.site-loaded .reveal-on-load .hero-art img, .reveal-on-scroll.in-view .hero-art img{filter:contrast(1) saturate(1) brightness(1)}
+
+/* Responsive hero & layout rules (desktop → tablet → mobile) */
+@media (max-width:1100px){
+  .hero{padding:5.2rem 0 4rem}
+  .hero .hero-art{width:420px; height:420px}
+  .logo-box{max-width:320px}
+  .logo-box img, .hero .hero-logo{max-width:280px}
+}
+
+@media (max-width:1024px){
+  .product-scroller .product-card{flex:0 0 46%}
+}
+
+@media (max-width:900px){
+  .hero{padding:4.2rem 0 3.2rem}
+  .hero .hero-inner{flex-direction:column; align-items:center; gap:1.2rem}
+  .hero .hero-copy{order:1; transform:none; text-align:center}
+  .hero .hero-art{order:2; width:260px; height:260px}
+  .logo-box{max-width:220px}
+  .logo-box img, .hero .hero-logo{max-width:180px}
+  /* Ensure ghost button centers and matches primary width */
+  .hero .hero-actions .btn.ghost{width:100%; max-width:320px; text-align:center; margin-top:8px}
+  .hero .hero-actions .btn.primary{width:100%; max-width:320px}
+}
+
+@media (max-width:768px){
+  .container{padding:1.6rem}
+  .product-scroller .product-card{flex:0 0 86%}
+}
+
+@media (max-width:425px){
+  .container{padding:1.2rem}
+  .hero{padding:3.2rem 0}
+  .hero .hero-art{width:200px; height:200px}
+  .logo-box{max-width:180px}
+  .logo-box img, .hero .hero-logo{max-width:140px}
+  .btn.large, .product-body .btn{display:block; width:100%; text-align:center; padding:0.95rem 1rem}
+  .product-scroller .product-card{flex:0 0 86%}
+}
+
+@media (max-width:375px){
+  .hero .hero-art{width:180px; height:180px}
+  .logo-box{max-width:140px}
+  .logo-box img, .hero .hero-logo{max-width:120px}
+  .modal{max-width:92%}
+}
+
+@media (max-width:320px){
+  .hero .hero-art{width:150px; height:150px}
+  .logo-box{max-width:120px}
+  .logo-box img, .hero .hero-logo{max-width:100px}
+  .container{padding:0.9rem}
+  .modal{max-width:96%}
+}
+
+/* Large centered logo */
+.hero .hero-logo{width:500px; height:500px; filter:drop-shadow(0 12px 36px rgba(0,0,0,0.12)); transition:transform .9s ease, filter .9s ease}
+
+
+/* Global image subtle mute for smoother entrance */
+.reveal-on-load img, .reveal-on-scroll img{filter:contrast(.92) saturate(.95) brightness(.98); transition:filter .9s ease, opacity .9s ease}
+.site-loaded .reveal-on-load img, .reveal-on-scroll.in-view img{filter:contrast(1) saturate(1) brightness(1)}
+
+/* Slightly soften text color during reveal for smoother effect */
+.reveal-on-load, .reveal-on-scroll{transition:color .9s ease}
+.site-loaded .reveal-on-load{color:var(--brown-900)}
+
+
+.promo-card{position:absolute; right:12px; bottom:12px; background:linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.88)); padding:12px; border-radius:10px; text-align:right; box-shadow:0 12px 36px rgba(31,18,6,0.10)}
+.promo-card .btn.ghost{background:transparent; border:1px solid rgba(0,0,0,0.06); padding:6px 8px; border-radius:8px; margin-top:8px}
+.promo-card .wa-icon{color:#fff; font-size:0.95rem}
+.cta-tag{color:rgba(255,255,255,0.85); font-weight:700; margin-bottom:1rem; letter-spacing:0.04em}
+.btn .fab{margin-left:0.45rem}
+.product-card .btn .fab{margin-left:0.45rem}
+.btn .fa-whatsapp{color:#fff; font-size:0.85rem}
+.section-tag{color:var(--brown-700); font-weight:700; margin-bottom:1rem; letter-spacing:0.04em}
+
+@media(max-width:1100px){
+  .hero .hero-art{width:320px; height:200px}
+}
+@media(max-width:900px){
+  .hero .hero-art{display:none}
+}
+
+/* Buttons */
+.btn{display:inline-block; padding:0.7rem 1.1rem; border-radius:10px; text-decoration:none; font-weight:700; transition:transform .22s ease, box-shadow .22s ease, background-color .22s ease}
+.btn.primary{background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:white; box-shadow:0 8px 20px rgba(168,111,74,0.12)}
+.btn.ghost{border:2px solid rgba(0,0,0,0.06); background:transparent; color:var(--brown-700)}
+.btn.large{padding:0.95rem 1.6rem; font-size:1.05rem}
+.btn:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(40,20,6,0.09)}
+
+/* Sections */
+section{padding:3rem 0}
+h2{color:var(--brown-700); margin-bottom:1rem}
+
+/* Why */
+#why{scroll-margin-top:120px}
+.why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem}
+.card{background:white; padding:1.6rem; border-radius:12px; box-shadow:0 10px 30px rgba(31,18,6,0.06); text-align:left; transition:transform .28s ease, box-shadow .28s ease}
+.card:hover{transform:translateY(-6px); box-shadow:0 20px 40px rgba(31,18,6,0.08)}
+.card i{color:var(--accent); margin-bottom:0.5rem}
+
+/* Keep #why scroll-margin but remove top padding: hero bottom now handles visual offset */
+@media (max-width:900px){ #why{scroll-margin-top:220px} }
+@media (max-width:425px){ #why{scroll-margin-top:180px} }
+@media (max-width:320px){ #why{scroll-margin-top:160px} }
+
+/* Products */
+.product-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem}
+.product-card{background:white; border-radius:12px; overflow:hidden; box-shadow:0 14px 34px rgba(31,18,6,0.06); display:flex; flex-direction:column; transform:translateY(12px); opacity:0; transition:transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s}
+.product-card img{width:100%; height:180px; object-fit:cover; display:block}
+.product-body{padding:1.1rem; display:flex; flex-direction:column; gap:0.6rem}
+.product-body .desc{flex:1; color:var(--muted); font-size:0.98rem}
+.meta{display:flex; justify-content:space-between; align-items:center; margin-top:0.6rem}
+.product-card.featured{border:2px solid var(--accent)}
+.product-card:hover{transform:translateY(-8px) scale(1.01); box-shadow:0 30px 60px rgba(31,18,6,0.09)}
+.badge-price{position:absolute; top:12px; left:12px; background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); color:var(--text-on-accent); padding:0.35rem 0.6rem; border-radius:999px; font-weight:800; box-shadow:0 8px 24px rgba(0,0,0,0.28)}
+.product-card .img-wrap{position:relative; overflow:hidden}
+.product-card .img-wrap::after{content:''; position:absolute; left:0; right:0; bottom:0; height:40%; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%)}
+
+/* CTA & Buttons (full-bleed, no rounded corners) */
+.cta{background:linear-gradient(180deg,var(--brown-700),var(--brown-500)); color:var(--bg); text-align:center; padding:0; border-radius:0; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; width:100vw; box-sizing:border-box; overflow:hidden}
+.cta-inner{max-width:var(--max-width); margin:0 auto; padding:3.6rem 2.4rem; box-sizing:border-box}
+.cta h2{color:var(--text-on-accent); margin-bottom:1rem}
+.cta h2 small{color:rgba(255,255,255,0.92); opacity:0.95; font-weight:600}
+.cta .btn.primary{background:linear-gradient(180deg,var(--accent),var(--accent-2)); box-shadow:0 18px 48px rgba(168,111,74,0.16)}
+
+/* Responsive CTA padding */
+@media (max-width:425px){ .cta-inner{padding:2.2rem 1.2rem} .cta .btn.large{width:100%} }
+@media (max-width:320px){ .cta-inner{padding:1.6rem 0.9rem} }
+@media (min-width:1200px){ .cta-inner{padding:4.2rem 2.4rem} }
+
+/* Slider & product badges/tags */
+.product-card{width:100%; min-width:260px}
+.tag{display:inline-block; background:rgba(127,74,32,0.08); color:var(--brown-700); padding:0.28rem 0.6rem; border-radius:999px; font-weight:700; font-size:0.85rem}
+.badge-seller{position:absolute; top:12px; right:12px; background:var(--accent); color:var(--text-on-accent); padding:0.35rem 0.6rem; border-radius:8px; font-weight:800; font-size:0.8rem; box-shadow:0 6px 18px rgba(0,0,0,0.14)}
+
+/* product description: preserve inline formatting and visually truncate */
+.product-card .desc{color:var(--muted); line-height:1.45; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+.product-card .desc em{font-style:italic; color:var(--brown-700)}
+.product-card .desc strong{font-weight:700; color:var(--brown-900)}
+
+/* scroller */
+.product-grid.scroller{display:block}
+.scroller-wrapper{width:100%; display:block}
+.product-scroller{display:flex; gap:1rem; overflow-x:auto; padding-bottom:1.6rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
+.product-scroller .product-card{scroll-snap-align:start; flex:0 0 78%; min-width:260px}
+
+/* hide native scrollbar */
+.product-scroller{ -ms-overflow-style: none; scrollbar-width: none;}
+.product-scroller::-webkit-scrollbar{display:none}
+
+/* dots */
+.slider-dots{display:flex; gap:0.5rem; justify-content:center; margin-top:0.6rem}
+.slider-dots button{width:9px; height:9px; border-radius:999px; background:rgba(0,0,0,0.12); border:none}
+.slider-dots button.active{background:var(--accent)}
+
+/* navigation controls */
+.slider-controls{display:flex; gap:0.6rem; justify-content:space-between; align-items:center; margin-bottom:0.8rem}
+.slider-controls .btn{padding:0.5rem 0.7rem; border-radius:999px; font-weight:700; background:rgba(255,255,255,0.9); box-shadow:0 6px 18px rgba(31,18,6,0.06)}
+
+/* ensure no overlapping text on images */
+.product-card .img-wrap{position:relative}
+.product-card .badge-price{left:12px}
+
+@media (min-width:700px){
+  .product-scroller .product-card{flex:0 0 46%}
+}
+@media (min-width:1000px){
+  .product-scroller .product-card{flex:0 0 31%}
+}
+
+
+/* Social Proof */
+.reviews{display:grid; gap:1rem}
+.review-head{display:flex; align-items:center; gap:0.6rem; margin-bottom:0.4rem}
+.avatar{width:32px; height:32px; border-radius:999px; object-fit:cover; box-shadow:0 8px 20px rgba(31,18,6,0.08); border:2px solid rgba(184,121,63,0.14); background:radial-gradient(circle at 30% 30%, rgba(216,182,150,0.18), rgba(184,121,63,0.10));}
+blockquote{background:white; padding:1rem; border-radius:8px; color:var(--brown-900); line-height:1.6; border-left:4px solid var(--accent); box-shadow:0 8px 18px rgba(31,18,6,0.04)}
+blockquote p{margin:0; color:var(--muted)}
+blockquote cite{display:block; margin-top:0.6rem; color:var(--muted); font-size:0.95rem}
+
+@media(min-width:700px){
+  .reviews{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Reveal animations */
+.in-view .product-card{transform:translateY(0); opacity:1}
+.in-view .card{transform:translateY(0); opacity:1}
+.article-appear{transform:translateY(0); opacity:1}
+
+.fade-up{transform:translateY(12px); opacity:0; transition:transform .6s ease, opacity .6s ease}
+.fade-up.in-view{transform:translateY(0); opacity:1}
+
+/* Small utilities */
+.center{display:flex; align-items:center; justify-content:center}
+
+/* Modal (product Info) */
+.modal-overlay{position:fixed; inset:0; background:transparent; display:flex; align-items:center; justify-content:center; padding:24px; z-index:1200}
+/* centered overlay variant applied site-wide when modal is centered */
+.modal-overlay.centered{align-items:center; padding:16px; background:rgba(10,10,10,0.36)}
+.modal{background:white; border-radius:12px; max-width:720px; width:100%; box-shadow:0 30px 80px rgba(31,18,6,0.18); overflow:hidden; display:flex; flex-direction:column; max-height:86vh}
+/* centered modal variant applied site-wide */
+.modal.centered{border-radius:12px; width:92%; max-width:420px; max-height:80vh; overflow:auto; box-shadow:0 24px 64px rgba(31,18,6,0.16)}
+.modal-header{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 20px; border-bottom:1px solid rgba(22,15,10,0.03)}
+.modal-header h3{margin:0; font-size:1.15rem}
+.modal-close{background:transparent; border:none; font-size:1.1rem; padding:8px 10px; cursor:pointer}
+.modal-body{padding:12px 18px; overflow:auto}
+.modal-meta{display:flex; gap:18px; align-items:center; margin-bottom:8px; color:var(--muted);}
+.meta-item{display:flex; align-items:center; gap:6px}
+.meta-item strong{color:var(--brown-700); margin:0; font-weight:700}
+.modal-desc{color:var(--brown-900); line-height:1.6}
+.modal-actions{display:flex; gap:0.8rem; padding:12px 20px; border-top:1px solid rgba(22,15,10,0.03); justify-content:flex-end; background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.98))}
+.btn.no-border{border:none; box-shadow:none}
+
+/* Responsive: mobile modal centered for devices <=425px */
+@media (max-width:425px){
+  /* small screens: center modal in viewport */
+  .modal-overlay{align-items:center; padding:16px}
+  .modal-overlay.dark-backdrop{background:rgba(10,10,10,0.36)}
+  .modal{border-radius:12px; width:92%; max-width:420px; max-height:80vh; overflow:auto; box-shadow:0 24px 64px rgba(31,18,6,0.16)}
+  .modal.no-scroll-mobile{overflow:hidden}
+  .modal-header{padding:12px 16px; position:relative; top:auto; background:white; z-index:3; display:flex; align-items:center; gap:8px}
+  .modal-close{font-size:1.3rem; padding:10px; border-radius:999px}
+  .modal-body{padding:16px; overflow:auto; -ms-overflow-style:none; scrollbar-width:none; padding-bottom:56px}
+  .modal.no-scroll-mobile .modal-body{overflow:hidden}
+  .modal-body::-webkit-scrollbar{display:none}
+  .modal-meta{flex-direction:column; gap:6px; align-items:flex-start; margin-bottom:10px}
+  .modal-meta .meta-item strong{display:none}
+  .modal-desc p{margin-bottom:0.8rem}
+  .modal-actions{display:flex; flex-direction:column; gap:8px; background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.98)); padding:12px 16px; box-shadow:none; z-index:3}
+  .modal-actions .btn{width:100%}
+
+  /* centered modal variant adjustments (centered variant and related classes) */
+  .modal-overlay.centered{padding:16px}
+  .modal.centered{border-radius:12px; width:92%; max-width:420px; max-height:80vh; overflow:auto; box-shadow:0 24px 64px rgba(31,18,6,0.16)}
+  .modal.centered .modal-header{position:relative; top:auto}
+  .modal.centered .modal-body{padding:18px}
+  .modal.centered .modal-meta{display:none}
+  /* show actions in centered modal and stack buttons */
+  .modal.centered .modal-actions{display:flex; flex-direction:column; gap:8px; padding:12px 16px; box-shadow:none; z-index:3}
+  .modal.centered .modal-actions .btn{width:100%}
+
+  /* rich text formatting inside modal description */
+  .modal-desc em{font-style:italic; color:var(--brown-700)}
+  .modal-desc strong{font-weight:700; color:var(--brown-900)}
+  .modal-desc p{margin:0 0 0.8rem 0}
+
+  .modal{display:block}
+}
+
+@media (max-width:320px){
+  .modal-header h3{font-size:1rem}
+  .modal-body{padding:10px 12px}
+  .modal-actions{padding:10px 12px}
+}
+
+@media(max-width:700px){ .modal{max-width:420px} }
+
+@media(min-width:900px){
+  .hero .container{display:flex; align-items:center; justify-content:space-between}
+}
+
+/* Sections */
+/* slightly larger spacing to give more breathing room between sections */
+section{padding:4rem 0}
+h2{color:var(--brown-700); margin-bottom:1rem}
+
+@media(min-width:900px){
+  .hero .container{display:flex; align-items:center; justify-content:space-between}
+}
+
+/* Animations: reveal on load and on scroll */
+@keyframes fadeInUp{from{opacity:0; transform:translateY(8px) scale(.998)} to {opacity:1; transform:none}}
+.reveal-on-load, .reveal-on-scroll{opacity:0; transform:translateY(8px); will-change:transform,opacity}
+.site-loaded .reveal-on-load{opacity:1; transform:none; animation:fadeInUp 1s cubic-bezier(.16,.84,.3,1) both; animation-delay:calc(var(--reveal-order, 0) * 70ms)}
+.reveal-on-scroll.in-view{opacity:1; transform:none; animation:fadeInUp 1s cubic-bezier(.16,.84,.3,1) both}
+
+/* WhatsApp icon: white & minimal so it reads across backgrounds */
+.btn .fa-whatsapp{margin-left:0.45rem; color:#fff; background:none; box-shadow:none; display:inline-block; width:auto; height:auto; font-size:0.95rem; vertical-align:baseline; transition:color .18s ease, transform .18s ease}
+
+/* button click / pressed effect (subtle) */
+.btn{transition:transform .16s cubic-bezier(.16,.84,.3,1), box-shadow .16s ease}
+.btn:active, .btn.btn-pressed{transform:translateY(1px) scale(.992)}
+
+/* subtle scale on reveal for depth */
+.reveal-on-load, .reveal-on-scroll{transform-origin:center center}
+.reveal-on-load.site-loaded, .reveal-on-scroll.in-view{animation-fill-mode:both}
+.reveal-on-scroll.in-view{animation:fadeInUp 1s cubic-bezier(.16,.84,.3,1) both}
+
+/* prefers reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .site-loaded .reveal-on-load, .reveal-on-scroll.in-view, .btn{transition:none; animation:none}
+}
+
+/* small stagger utility */
+.reveal-on-load{--reveal-order:0} 
